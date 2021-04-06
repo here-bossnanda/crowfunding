@@ -28,23 +28,4 @@ func main() {
 	api.POST("/users", userHandler.RegisterUser)
 
 	router.Run(":8090")
-
-	// userInput := user.RegisterUserInput{}
-	// userInput.Name = "Test dari user input"
-	// userInput.Occupation = "Pebisnis"
-	// userInput.Email = "test1@gmail.com"
-	// userInput.Password = "qwerty123"
-
-	// userService.RegisterUser(userInput)
-	
-	// user := user.User{
-	// 	Name: "Ahmad",
-	// 	Occupation: "Singer",
-	// 	Email: "ahmad@gmail.com",
-	// 	Password: "qwerty123",
-	// 	Role: "user",
-	// }
-
-	// userRepository.Save(user)
-
 }
