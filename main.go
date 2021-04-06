@@ -59,7 +59,7 @@ func authMiddleware(authService auth.Service, userService user.Service) gin.Hand
 	
 		token, err := authService.ValidateToken(stringToken)
 		if err != nil {
-			response := helper.APIResponse("Unauthorized", http.StatusUnauthorized, "error", err.Error())
+			response := helper.APIResponse("Unauthorized", http.StatusUnauthorized, "error", nil)
 			c.AbortWithStatusJSON(http.StatusUnauthorized,response)
 			return
 		}
