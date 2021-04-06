@@ -3,7 +3,6 @@ package main
 import (
 	"crowfunding/handler"
 	"crowfunding/user"
-	"fmt"
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -21,28 +20,13 @@ func main() {
 
 	userRepository := user.NewRepository(db)
 	userService := user.NewService(userRepository)
-
-	input := user.LoginUserInput{
-		Email: "testsa1@gmail.com",
-		Password: "qwerty123s",
-	}
-	user, err := userService.Login(input)
-
-	if err != nil {
-		fmt.Println("terjadi kesalahan")
-		fmt.Println(err.Error())
-		return
-	}
-
-	fmt.Println(user.Email)
-	fmt.Println(user.Name)
-	
 	userHandler := handler.NewUserHandler(userService)
 
 	router := gin.Default()
 	api := router.Group("/api/v1")
 
-	api.POST("/users", userHandler.RegisterUser)
+	api.POST("/register", userHandler.RegisterUser)
+	api.POST("/login", userHandler.Login)
 
 	router.Run(":8090")
 }
