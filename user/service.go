@@ -11,6 +11,7 @@ import (
 type Service interface {
 	RegisterUser(input RegisterUserInput) (User, error)
 	Login(input LoginUserInput) (User, error)
+	isEmailAvailable(input CheckEmailInput) (bool, error)
 }
 
 type service struct {
@@ -63,4 +64,18 @@ func (s *service) Login(input LoginUserInput) (User, error) {
 	}
 
 	return user, nil
+}
+
+func (s *service) isEmailAvailable(input CheckEmailInput) (bool, error) {
+	email := input.Email
+	user, err := s.repository.FindByEmail(email)
+	if err != nil {
+		return false, err
+	}
+
+	if user.ID == 0 {
+		return true, nil
+	}
+
+	return true, nil
 }
