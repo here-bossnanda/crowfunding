@@ -3,6 +3,7 @@ package handler
 import (
 	"crowfunding/helper"
 	"crowfunding/user"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -106,7 +107,8 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, response)
 		return
 	}
-	path := "images/" + file.Filename
+	userId := 3
+	path := fmt.Sprintf("images/%d-%s",userId, file.Filename)
 	err = c.SaveUploadedFile(file, path)
 	if err != nil {
 		statusMessage := gin.H{"is_uploaded": false}
@@ -115,7 +117,6 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 		return
 	}
 
-	userId := 3
 
 	_, err = h.userService.SaveAvatar(userId, path)
 	if err != nil {
@@ -126,6 +127,6 @@ func (h *userHandler) UploadAvatar(c *gin.Context) {
 	}
 
 	data := gin.H{"is_uploaded": true}
-	response := helper.APIResponse("Successfully uploaded avatar", http.StatusOK, "error", data)
+	response := helper.APIResponse("Successfully uploaded avatar", http.StatusOK, "success", data)
 	c.JSON(http.StatusOK, response)
 }
