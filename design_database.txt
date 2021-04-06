@@ -1,6 +1,6 @@
 User
 - id : int
-- name : int 
+- name : varchar
 - occupation : varchar
 - email : varchar
 - password : varchar
@@ -37,3 +37,9 @@ Transaction
 - campaign_id : int
 - user_id : int
 - amount : int
+- status : varchar
+- code : varchar
+
+- created_at : datetime
+- updated_at : datetime
+
