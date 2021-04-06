@@ -28,6 +28,8 @@ func main() {
 	campaignRepository := campaign.NewRepository(db)
 
 	userService := user.NewService(userRepository)
+	campaignService := campaign.NewService(campaignRepository)
+
 	authService := auth.NewService()
 
 	userHandler := handler.NewUserHandler(userService, authService)
